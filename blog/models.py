@@ -24,7 +24,16 @@ class Post(models.Model):
     # User is foreign key for author, on_delete means when user is deleted then what do we do
     # in this case CASCADE means we also delete the post 
     author = models.ForeignKey(User, on_delete=models.CASCADE)
- 
+    #storing default height and widths for our header images
+    image_width = models.IntegerField(default=2560)
+    image_height = models.IntegerField(default=1440)
+    #this is our header image 
+    header_image = models.ImageField(
+        default = "default_header.png",
+        upload_to="blog_headers",
+        width_field="image_width",
+        height_field="image_height",
+    )
 
     #this function basically states how the object will be presented as a string 
     def __str__(self):
