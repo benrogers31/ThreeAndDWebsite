@@ -38,6 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'users.apps.UsersConfig',
+    'blog.apps.BlogConfig',
+    'django_cleanup',
+    'ckeditor',
+    'ckeditor_uploader',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -119,3 +125,46 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+#media root is full path to a directory where we would like django to store out uploaded files
+#os.path.join ensures no matter the operating system that path works 
+#BASE_DIR is created by django specifys the location of the project's base direc
+#this is where our media will be located on the file system 
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+#this is how we will access the media through the browser 
+#how we access this directly
+MEDIA_URL = '/media/'
+
+#Default is bootstrap 2 which is pretty old these days
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+#When you login using Django stuff it automatically sends you to ur own profile
+#we are gonna change that here
+LOGIN_REDIRECT_URL = 'blog-home'
+
+#this tells django where the login route is 
+LOGIN_URL = 'login'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = "threeanddautosender@gmail.com"
+#This is an enviroment variable for the email's password
+EMAIL_HOST_PASSWORD =  os.environ.get('3&D_EMAIL_PWD')
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+#This is the skeditor jquery 
+CKEDITOR_JQUERY_URL = 'https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js'
+ #this will be where the images are stored that are uploaded through the skeditor
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+CKEDITOR_IMAGE_BACKEND = "pillow"
+
+CKEDITOR_CONFIGS = {
+'default': {
+   #You can change this based on your requirements.
+    'width': 'auto',
+
+          },
+    }
