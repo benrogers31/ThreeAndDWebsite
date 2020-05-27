@@ -4,8 +4,9 @@ from .models import Post
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.paginator import Paginator
-from django.contrib.auth.models import User
-
+#from django.contrib.auth.models import User
+from django.conf import settings
+from django.contrib.auth import get_user_model
 
 #from django.http import HttpResponse
 
@@ -69,7 +70,8 @@ class UserPostListView(ListView):
     #override
     def get_queryset(self):
         #this gets the user with the specific user name from the URL or it returns as 404 if it cant be found
-        user = get_object_or_404(User, username = self.kwargs.get('username') )
+        print(self.kwargs.get('username'))
+        user = get_object_or_404(get_user_model(), username = self.kwargs.get('username') )
         #get_queryset will be overriden so will the ordering feild so we need to order it in here
         return Post.objects.filter(author=user).order_by('-date_posted')
 

@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils import timezone
 #this imports the user table that django already works well with
-from django.contrib.auth.models import User
+from django.conf import settings
 from django.urls import reverse
 from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
@@ -23,7 +23,9 @@ class Post(models.Model):
     date_posted = models.DateTimeField(default = timezone.now)
     # User is foreign key for author, on_delete means when user is deleted then what do we do
     # in this case CASCADE means we also delete the post 
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+
+    #slug = models.SlugField(blank=True, unique=True)
     #storing default height and widths for our header images
     image_width = models.IntegerField(default=2560)
     image_height = models.IntegerField(default=1440)

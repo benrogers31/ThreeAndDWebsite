@@ -168,3 +168,6 @@ CKEDITOR_CONFIGS = {
 
           },
     }
+
+#overrides the default behavior of user class
+AUTH_USER_MODEL = 'users.Account'

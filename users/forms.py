@@ -1,7 +1,7 @@
 from django import forms
-from django.contrib.auth.models import User
+#from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from .models import Profile
+from .models import Profile, Account
 
 #this class inherits from Django's prebuilt user creation form
 class UserRegisterForm(UserCreationForm):
@@ -11,7 +11,7 @@ class UserRegisterForm(UserCreationForm):
     #Nested namespace for configurations
     class Meta:
         #we specify what we want this model to interact with
-        model = User 
+        model = Account 
         #these are the feilds we want shown on our form and in what order
         fields = ['username', 'email','password1', 'password2']
 
@@ -24,7 +24,7 @@ class UserUpdateForm(forms.ModelForm):
     #Nested namespace for configurations
     class Meta:
         #we specify what we want this model to interact with
-        model = User 
+        model = Account
         #these are the feilds we want shown on our form and in what order
         fields = ['username', 'email']
 
