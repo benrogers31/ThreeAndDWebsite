@@ -1,7 +1,7 @@
 from django.db import models
 from PIL import Image
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
-from .fields import NonStrippingTextField
+from django.core.validators import RegexValidator
 
 
 
@@ -46,6 +46,8 @@ class MyAccountManager(BaseUserManager):
 
 #We are making our own custom user in this
 class Account(AbstractBaseUser):
+    
+    
     #these are all required to extend the absract class  
     email = models.EmailField(verbose_name="email", max_length=60, unique=True)
     username = models.CharField(max_length=25, unique=True)
@@ -57,7 +59,7 @@ class Account(AbstractBaseUser):
     is_superuser = models.BooleanField(default=False)
 
     #these are the things we want to add
-    display_name = NonStrippingTextField(default=username)
+    display_name = models.CharField(max_length=25)
     is_author = models.BooleanField(default=False)
 
     #this is what the user can use to log in with
