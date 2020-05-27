@@ -62,6 +62,10 @@ class PostListView(ListView):
 #this only lists posts that have been made by the user
 class UserPostListView(ListView):
 
+    #When this class is loaded this display name will be initialized
+    def __init__(self):
+        display_name = ""
+
     model = Post
     template_name = 'blog/user_posts.html'
     context_object_name = 'posts'
@@ -70,10 +74,12 @@ class UserPostListView(ListView):
     #override
     def get_queryset(self):
         #this gets the user with the specific user name from the URL or it returns as 404 if it cant be found
-        print(self.kwargs.get('username'))
-        user = get_object_or_404(get_user_model(), username = self.kwargs.get('username') )
+        user = get_object_or_404(get_user_model(), username = self.kwargs.get('username'))
+        #setting the display name
+        self.display_name = user.display_name
         #get_queryset will be overriden so will the ordering feild so we need to order it in here
         return Post.objects.filter(author=user).order_by('-date_posted')
+
 
 class PostDetailView(DetailView):
     model = Post

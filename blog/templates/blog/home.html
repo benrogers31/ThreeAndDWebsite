@@ -12,14 +12,16 @@
           <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
             <div class="media-body">
               <div class="article-metadata">
-                <a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a>
+                <a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author.display_name }}</a>
                 <!-- this is how we adjust for the data that we want to deal with, check the documentation for specifics-->
                 <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
               </div>
               <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
               <p class="article-content">{{ post.content|safe }}</p>
               <script>
-                	var articles =  document.getElementsByClassName("article-content")
+                	//this script basically makes every image the width of the container 
+                  //this prevents us from haveing to resize every image 
+                  var articles =  document.getElementsByClassName("article-content")
                   var images = document.getElementsByTagName("img")
 	                for (img of images ){
 		                  if (img.getAttribute("class")==="rounded-circle article-img"){
