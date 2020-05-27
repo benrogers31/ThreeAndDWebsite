@@ -16,6 +16,7 @@ class Post(models.Model):
     
     #A good rule of thumb is that you use CharField when you need to limit the maximum length, TextField otherwise. 
     title = models.CharField(max_length = 100)
+    summary = models.TextField(default="Whoops our author forgot to put a summary... Roast them in the comment secton!")
     #this is such that the text feild has more functionality than a regular text feild  
     content = RichTextUploadingField() 
     #auto_now = changes evertime updated, auto_now_add is only there when it is initialized
@@ -25,7 +26,6 @@ class Post(models.Model):
     # in this case CASCADE means we also delete the post 
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
-    #slug = models.SlugField(blank=True, unique=True)
     #storing default height and widths for our header images
     image_width = models.IntegerField(default=2560)
     image_height = models.IntegerField(default=1440)

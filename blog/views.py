@@ -90,7 +90,7 @@ class PostDetailView(DetailView):
 #LoginRequiredMixin basically ensures one is logged to access this view
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
-    fields = ['title', 'content']
+    fields = ['title', 'summary', 'content']
     #default for this one is blog/post_form
 
     def form_valid(self, form):
