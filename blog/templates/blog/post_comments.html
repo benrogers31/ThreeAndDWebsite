@@ -1,0 +1,24 @@
+{% extends "blog/post_detail.html" %}
+{% block content %}  
+<div class="row mt-2 mb-2 with-border">
+    <h2 class="pull-left"> Leave a comment! </h2>
+    <div class="form-group col-xs-12 col-sm-9 col-lg-10">
+        <textarea class="form-control" id="new-comment" placeholder="Your message" required=""></textarea>
+    </div>
+    <button type="submit" class="btn btn-normal pull-right">Submit</button>
+
+</div>
+<div class="row mt-2 mb-2 with-border">
+    <img class="rounded-circle comment-img pull-left" src="{{ post.author.profile.image.url }}">
+
+  
+    <div class="comemnt-metadata">
+        
+    </div>
+    <div class="media-body">
+        <small class="mr-2">{{ post.author.display_name }}</small>
+        <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    </div>
+
+{% endblock content %}

@@ -1,5 +1,6 @@
 <!-- This uses template inheritance extends from base.html -->
 {% extends "blog/base.html" %}
+{% load static %}
  <!-- This is marks where it should be indented from --> 
 {% block content %}    
     <!-- HERE IS HOW WE WRITE CODE FOR VARIABLES INPUTED IN VIEWS      -->
@@ -8,30 +9,43 @@
     {% for post in posts %}
         <!-- IF WE WANT TO ACCESS A VARIABBLE WE USE those braces-->
         <article class="media content-section">
-          <!-- rounded circle is bootstrap class and article img is a custom class-->
-          <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
-            <div class="media-body">
-              <div class="article-metadata">
-                <a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author.display_name }}</a>
-                <!-- this is how we adjust for the data that we want to deal with, check the documentation for specifics-->
-                <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
-              </div>
-              <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
-              <p class="article-content">{{ post.summary }}</p>
-              <script>
-                	//this script basically makes every image the width of the container 
-                  //this prevents us from haveing to resize every image 
-                  var articles =  document.getElementsByClassName("article-content")
-                  var images = document.getElementsByTagName("img")
-	                for (img of images ){
-		                  if (img.getAttribute("class")==="rounded-circle article-img"){
-                        continue
+          <div class="container">
+            <!-- <div class="row post-img mb-3 mt-3">
+              <img src="media/default_header.png">
+            </div> -->
+            <!-- rounded circle is bootstrap class and article img is a custom class-->
+            <div class="row">
+              <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
+              <div class="media-body">
+                  <div class="article-metadata">
+                    <a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author.display_name }}</a>
+                    <!-- this is how we adjust for the data that we want to deal with, check the documentation for specifics-->
+                    <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
+                  </div>
+                  
+                  <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
+                  <p class="article-content d-none d-sm-block">{{ post.summary }}</p>
+                  <script>
+                      //this script basically makes every image the width of the container 
+                      //this prevents us from haveing to resize every image 
+                      var articles =  document.getElementsByClassName("article-content")
+                      var images = document.getElementsByTagName("img")
+                      for (img of images ){
+                          if (img.getAttribute("class")==="rounded-circle article-img"){
+                            continue
+                          }
+                          img.setAttribute("style", "height:auto; width:100%")
                       }
-                      img.setAttribute("style", "height:auto; width:100%")
-	                }
-              </script>
+                  </script>
+              </div>
             </div>
-          </article>
+            <div class="row">
+              <div class="col-4">hello</div>
+              <div class="col-4">hello</div>
+              <div class="col-4">hello</div>
+            </div>
+          </div>
+        </article>
     {% endfor %}
     {% if is_paginated %}
     

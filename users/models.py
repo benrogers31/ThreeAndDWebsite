@@ -59,7 +59,7 @@ class Account(AbstractBaseUser):
     is_superuser = models.BooleanField(default=False)
 
     #these are the things we want to add
-    display_name = models.CharField(max_length=25)
+    display_name = models.CharField(max_length=25, default=username)
     is_author = models.BooleanField(default=False)
 
     #this is what the user can use to log in with

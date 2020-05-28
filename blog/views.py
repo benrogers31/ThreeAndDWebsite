@@ -1,12 +1,17 @@
 from django.shortcuts import render, get_object_or_404
 #the . in front of models is because of the current directory 
-from .models import Post 
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from .models import Post, Comment
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView 
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.paginator import Paginator
 #from django.contrib.auth.models import User
 from django.conf import settings
 from django.contrib.auth import get_user_model
+from .forms import CommentCreateForm
+from django.views.generic.edit import FormMixin
+from django.urls import reverse , reverse_lazy
+
+
 
 #from django.http import HttpResponse
 
@@ -81,11 +86,44 @@ class UserPostListView(ListView):
         return Post.objects.filter(author=user).order_by('-date_posted')
 
 
-class PostDetailView(DetailView):
+class PostDetailView(FormMixin, DetailView):
     model = Post
+    form_class = CommentCreateForm
+ 
+    
+    def get_success_url(self):
+        return reverse_lazy('post-detail', kwargs={'pk': self.object.pk})
+
+   
+        
+    
+    def get_context_data(self, **kwargs):
+        post = self.get_object()
+        comments = Comment.objects.filter(post = post)
+        context = super().get_context_data(**kwargs)
+        context['comments'] = comments
+        return context
+    
     #the default this will look for is <app>/<model>_<viewtype>.html eg blog/post_detail.html
 
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.get_form()
+        
+        form.instance.post = self.object
 
+        form.instance.author = self.request.user
+
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            print("btiti")
+            return self.form_invalid(form)
+
+    def form_valid(self, form):
+        print("hello")
+        form.save()
+        return super(PostDetailView, self).form_valid(form)
 
 #LoginRequiredMixin basically ensures one is logged to access this view
 class PostCreateView(LoginRequiredMixin, CreateView):
