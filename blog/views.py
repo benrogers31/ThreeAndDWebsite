@@ -13,6 +13,7 @@ from django.urls import reverse , reverse_lazy
 
 
 
+
 #from django.http import HttpResponse
 
 
@@ -94,7 +95,6 @@ class PostDetailView(FormMixin, DetailView):
     def get_success_url(self):
         return reverse_lazy('post-detail', kwargs={'pk': self.object.pk})
 
-   
         
     
     def get_context_data(self, **kwargs):

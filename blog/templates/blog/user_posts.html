@@ -12,7 +12,7 @@
                 <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
               </div>
               <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
-              <p class="article-content">{{ post.content|safe }}</p>
+              <p class="article-content">{{ post.summary }}</p>
               <script>
                   //This gets all the images that would be in the article section
                   var articles =  document.getElementsByClassName("article-content")

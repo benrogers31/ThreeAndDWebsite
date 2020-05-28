@@ -1,6 +1,8 @@
 <!-- This uses template inheritance extends from base.html -->
 {% extends "blog/base.html" %}
  <!-- This is marks where it should be indented from --> 
+
+{% load crispy_forms_tags %}
 {% block content %}    
 <!-- We are using object instead of post in here because thats the default -->
 <article class="media content-sectionr">
@@ -39,22 +41,31 @@
             </script>
             
         </div>
-      </div>
-    <form method="POST">
-        {% csrf_token %}
-        <div class="row mt-2 mb-2 with-border">
+    </div>
+    {% if user.is_authenticated %}
+    <div class="row mt-2 mb-2 with-border">
+        <form method="POST">
+            {% csrf_token %}
             <h2 class="pull-left"> Leave a comment! </h2>
-                {{ form }}
+          
+            {{ form|crispy }}
 
-                <button type="submit" class="btn btn-normal pull-right">Submit</button>
-            
-        </div>
-    </form>
+            <button type="submit" class="btn btn-normal pull-right">Submit</button>
+        </form>
+    </div>
+    {% else %}
+    <div class="row mt-2 mb-2">    
+        <h2 class="pull-left"> Comment Section </h2> 
+    </div>
+    <div class="row mt-2 mb-2 with-border"> 
+        <h5> Sign in to leave a comment </h5>
+    </div>
+    {% endif %}
    
     {% for comment in comments %}
     <div class="row mt-2 mb-2 with-border">
         
-        <img class="rounded-circle comment-img pull-left" src="{{ comment.author.profile.image.url }}">
+        <img class="rounded-circle comment-img pull-left mt-2 mb-3" src="{{ comment.author.profile.image.url }}">
         <div class="media-body">
             <small class="mr-2">{{ comment.author.display_name }}</small>
             <small class="text-muted">{{ comment.date_posted|date:"F d, Y" }}</small>
