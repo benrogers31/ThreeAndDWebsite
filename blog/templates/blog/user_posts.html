@@ -14,17 +14,17 @@
               <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
               <p class="article-content">{{ post.summary }}</p>
               <script>
-                  //This gets all the images that would be in the article section
-                  var articles =  document.getElementsByClassName("article-content")
-                  var images = document.getElementsByTagName("img")
-                  //Resizing them to fit the width of their container
-                  for (img of images ){
-                      if (img.getAttribute("class")==="rounded-circle article-img"){
-                          continue
-                      }
-                      img.setAttribute("style", "height:auto; width:100%")
-                  }
-                </script>
+                var articles =  document.getElementsByClassName("article-content")
+                var images = document.getElementsByTagName("img")
+                for (img of images ){
+                    // since we don't want to constantly resize images uploaded to skeditor
+                    // this automatically resizes them to fit the page
+                    if(img.src.includes("media/uploads")){
+                        img.setAttribute("style", "height:auto; width:100%")
+
+                    }
+                }
+              </script>
             </div>
           </article>
     {% endfor %}
