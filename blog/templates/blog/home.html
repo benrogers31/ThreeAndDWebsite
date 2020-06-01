@@ -25,25 +25,13 @@
                   
                   <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
                   <p class="article-content d-none d-sm-block">{{ post.summary }}</p>
-                  <script>
-                      //this script basically makes every image the width of the container 
-                      //this prevents us from haveing to resize every image 
-                      var articles =  document.getElementsByClassName("article-content")
-                      var images = document.getElementsByTagName("img")
-                      for (img of images ){
-                          if (img.getAttribute("class")==="rounded-circle article-img"){
-                            continue
-                          }
-                          img.setAttribute("style", "height:auto; width:100%")
-                      }
-                  </script>
               </div>
             </div>
-            <div class="row">
+            <!-- <div class="row">
+              <div class="col-4"> {{ post.hit_count }}</div>
               <div class="col-4">hello</div>
               <div class="col-4">hello</div>
-              <div class="col-4">hello</div>
-            </div>
+            </div> -->
           </div>
         </article>
     {% endfor %}

@@ -15,18 +15,19 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'blog/main.css' %}">
     {% if title %}  
-        <title> Django Blog - {{ title }} </title>
+        <title> 3&D Blog - {{ title }} </title>
     {% else %}
-        <title> Django Blog </title>
+        <title> 3&D Blog </title>
     {% endif %}
    
 </head>
 <body>
       
-    <header class="site-header">
+    <header class="site-header pb-4">
         <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
         <div class="container">
-            <a class="navbar-brand mr-4" href="{% url 'blog-home' %}">Django Blog</a>
+            <img class="pr-4"  src="/static/logo.png" style="height:60px; width:auto"> 
+            <a class="navbar-brand mr-4" href="{% url 'blog-home' %}">3&D Blog </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>

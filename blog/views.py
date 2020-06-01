@@ -99,6 +99,9 @@ class PostDetailView(FormMixin, DetailView):
     
     def get_context_data(self, **kwargs):
         post = self.get_object()
+        #Post.objects.filter(post =post.id ).update(hit_count= post.hit_count + 1)
+        #post.hit_count = post.hit_count + 1
+        Post.objects.select_for_update().filter(id=post.id).update(hit_count= post.hit_count+1)
         comments = Comment.objects.filter(post = post)
         context = super().get_context_data(**kwargs)
         context['comments'] = comments

@@ -15,7 +15,7 @@ class UserRegisterForm(UserCreationForm):
         #we specify what we want this model to interact with
         model = Account 
         #these are the feilds we want shown on our form and in what order
-        fields = ['username', 'email','password1', 'password2']
+        fields = ['username','display_name', 'email','password1', 'password2']
 
     def clean_email(self):
         if self.is_valid:

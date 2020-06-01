@@ -59,7 +59,7 @@ class Account(AbstractBaseUser):
     is_superuser = models.BooleanField(default=False)
 
     #these are the things we want to add
-    display_name = models.CharField(max_length=25, default=username)
+    display_name = models.CharField(max_length=25)
     is_author = models.BooleanField(default=False)
 
     #this is what the user can use to log in with
@@ -85,7 +85,7 @@ class Profile(models.Model):
     user = models.OneToOneField(Account, on_delete=models.CASCADE)
     #setting an image feild and making the default deafault.jpg
     #profile_pics will be the directory images get stored in when we upload a profile 
-    image = models.ImageField(default='default.jpg', upload_to='profile_pics')
+    image = models.ImageField(default='logo.png', upload_to='profile_pics')
 
     #this is basically how the profile will look as a string 
     def __str__(self):

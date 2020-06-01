@@ -16,5 +16,6 @@ urlpatterns = [
     path('post/new/',  PostCreateView.as_view(), name='post-create'),
     #always throw in the trailing slash /
     path('about/', views.about, name ='blog-about'),
+    
 
 ]

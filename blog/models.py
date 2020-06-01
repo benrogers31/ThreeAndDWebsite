@@ -5,6 +5,8 @@ from django.conf import settings
 from django.urls import reverse
 from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
+from django.contrib.contenttypes.fields import GenericRelation
+
 
 
 #things that we need to save: Users, posts -> users already have their thing in django so we are gonna work with posts to start
@@ -26,6 +28,7 @@ class Post(models.Model):
     # in this case CASCADE means we also delete the post 
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
+    hit_count = models.PositiveIntegerField(default = 0)
     #storing default height and widths for our header images
     image_width = models.IntegerField(default=2560)
     image_height = models.IntegerField(default=1440)
@@ -46,6 +49,8 @@ class Post(models.Model):
     def get_absolute_url(self):
         #gets the full path to post-detail with the primary key in the url
         return reverse('post-detail', kwargs={'pk': self.pk})
+
+
 
 class Comment(models.Model):
     content = models.TextField(max_length=10000,default="3&D")
