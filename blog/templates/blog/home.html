@@ -10,9 +10,9 @@
         <!-- IF WE WANT TO ACCESS A VARIABBLE WE USE those braces-->
         <article class="media content-section">
           <div class="container">
-            <!-- <div class="row post-img mb-3 mt-3">
+            <div class="row post-img mb-3 mt-3">
               <img src="media/default_header.png">
-            </div> -->
+            </div>
             <!-- rounded circle is bootstrap class and article img is a custom class-->
             <div class="row">
               <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
@@ -27,13 +27,20 @@
                   <p class="article-content d-none d-sm-block">{{ post.summary }}</p>
               </div>
             </div>
-            <!-- <div class="row">
-              <div class="col-4"> {{ post.hit_count }}</div>
-              <div class="col-4">hello</div>
-              <div class="col-4">hello</div>
-            </div> -->
           </div>
         </article>
+        <script>
+          var articles =  document.getElementsByClassName("article-content")
+          var images = document.getElementsByTagName("img")
+          for (img of images ){
+              // since we don't want to constantly resize images uploaded to skeditor
+              // this automatically resizes them to fit the page
+              if(img.src.includes("media/de")|img.src.includes("media/blog_headers")){
+                  img.setAttribute("style", "height:auto; width:100%")
+
+              }
+          }
+      </script>
     {% endfor %}
     {% if is_paginated %}
     
