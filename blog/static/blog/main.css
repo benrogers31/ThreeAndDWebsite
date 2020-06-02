@@ -2,11 +2,14 @@ body {
     background: #fafafa;
     color: #333333;
     margin-top: 5rem;
-    min-height: 100vh;
+    min-height: 100%;
     position: relative;
     min-height: 100vh;
     padding-bottom: 4 rem;
+    margin-bottom: 6 rem;
   }
+
+
 a {
   color: #df701c;
 }
@@ -19,14 +22,21 @@ ul {
   margin: 0;
 }
 
+body::after {
+  content: '';
+  display: block;
+  height: 50px; /* Set same as footer's height */
+}
+
 footer {
   border: 1px solid #dddddd;
   border-radius: 3px;
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 4 rem;
+  height: 55px;
 }
+
 
 
 
