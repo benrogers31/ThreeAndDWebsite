@@ -153,9 +153,11 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = "threeanddautosender@gmail.com"
+EMAIL_HOST_USER = "3anddautosender@gmail.com"
 #This is an enviroment variable for the email's password
-EMAIL_HOST_PASSWORD =  os.environ.get('THREE_AND_D_PWD')
+print(os.environ.get('EMAIL_PWD'))
+EMAIL_HOST_PASSWORD =  os.environ.get('EMAIL_PWD')
+
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 #This is the skeditor jquery 
