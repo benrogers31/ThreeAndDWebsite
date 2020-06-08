@@ -6,7 +6,7 @@
 {% block content %}    
     <div class="content-section">
         <!-- this post request sends out information -->
-        <form method="POST">
+        <form method="POST" enctype="multipart/form-data">
             <!-- This is basically here for security-->
             {% csrf_token %}
             <fieldset class="form-group">
