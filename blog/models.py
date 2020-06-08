@@ -28,7 +28,6 @@ class Post(models.Model):
     # in this case CASCADE means we also delete the post 
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
-    hit_count = models.PositiveIntegerField(default = 0)
     #storing default height and widths for our header images
     image_width = models.IntegerField(default=2560)
     image_height = models.IntegerField(default=1440)
