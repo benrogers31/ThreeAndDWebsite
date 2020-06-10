@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+import json 
+
+with open('/etc/threeandd_config.json') as config_file:
+    config = json.load(config_file)
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,8 +24,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY  = os.environ.get('THREE_AND_D_SECRET_KEY')
+#SECRET_KEY  = os.environ.get('THREE_AND_D_SECRET_KEY')
 
+SECRET_KEY = config['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -155,8 +160,8 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = "3anddautosender@gmail.com"
 #This is an enviroment variable for the email's password
-print(os.environ.get('EMAIL_PWD'))
-EMAIL_HOST_PASSWORD =  os.environ.get('EMAIL_PWD')
+#EMAIL_HOST_PASSWORD =  os.environ.get('EMAIL_PWD')
+EMAIL_HOST_PASSWORD = config['EMAIL_PWD']
 
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
