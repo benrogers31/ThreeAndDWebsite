@@ -101,7 +101,7 @@ class PostDetailView(FormMixin, DetailView):
         post = self.get_object()
         #Post.objects.filter(post =post.id ).update(hit_count= post.hit_count + 1)
         #post.hit_count = post.hit_count + 1
-        Post.objects.select_for_update().filter(id=post.id).update(hit_count= post.hit_count+1)
+        #Post.objects.select_for_update().filter(id=post.id).update(hit_count= post.hit_count+1)
         comments = Comment.objects.filter(post = post)
         context = super().get_context_data(**kwargs)
         context['comments'] = comments
@@ -120,11 +120,9 @@ class PostDetailView(FormMixin, DetailView):
         if form.is_valid():
             return self.form_valid(form)
         else:
-            print("btiti")
             return self.form_invalid(form)
 
     def form_valid(self, form):
-        print("hello")
         form.save()
         return super(PostDetailView, self).form_valid(form)
 
