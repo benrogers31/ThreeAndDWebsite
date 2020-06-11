@@ -27,13 +27,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 #SECRET_KEY  = os.environ.get('THREE_AND_D_SECRET_KEY')
 
 SECRET_KEY = config['SECRET_KEY']
-print("hello")
-print(config['SECRET_KEY'])
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['172.105.5.123','localhost']
+ALLOWED_HOSTS = ['www.threeanddanalytics.com','172.105.5.123','localhost']
 
 
 # Application definition
@@ -156,7 +155,7 @@ LOGIN_REDIRECT_URL = 'blog-home'
 #this tells django where the login route is 
 LOGIN_URL = 'login'
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+p3EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
