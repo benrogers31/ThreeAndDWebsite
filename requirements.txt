@@ -12,5 +12,5 @@ idna==2.9
 Pillow==7.1.2
 pilkit==2.0 
 pytz==2019.3
-urllib3==1.25.9
+urllib3==1.26.5
 requests==2.23.0
